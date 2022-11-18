@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import "./ExpenseForm.css";
 
 export const ExpenseForm = () => {
-	//NOTE - most common way is using multiple states instead of a single object as seen below
+	//NOTE - most common way is using multiple useState instead of a single object as seen below
 	const [enteredTitle, setEnteredTitle] = useState("");
 	const [enteredAmount, setEnteredAmount] = useState("");
 	const [enteredDate, setEnteredDate] = useState("");
@@ -44,12 +44,32 @@ export const ExpenseForm = () => {
 		// });
 	};
 
+	const submitHandler = (e) => {
+		//NOTE - prevent the page to reload on submit
+		e.preventDefault();
+		//NOTE - colecting and storing the data colected in an object
+		const expenseData = {
+			title: enteredTitle,
+			amount: enteredAmount,
+			date: new Date(enteredDate),
+		};
+		//NOTE - setting the form back to empty string after submition
+		setEnteredTitle("");
+		setEnteredAmount("");
+		setEnteredDate("");
+	};
+
 	return (
-		<form>
+		<form onSubmit={submitHandler}>
 			<div className="new-expense__controls">
 				<div className="new-expense__control">
 					<label>Title</label>
-					<input type="text" onChange={titleChangeHandler} />
+					<input
+						type="text"
+						//NOTE - 2way binding - listen(onChange) and feed(value) back to the input
+						value={enteredTitle}
+						onChange={titleChangeHandler}
+					/>
 				</div>
 				<div className="new-expense__control">
 					<label>Amount</label>
@@ -57,6 +77,7 @@ export const ExpenseForm = () => {
 						type="number"
 						min="0.01"
 						step="0.01"
+						value={enteredAmount}
 						onChange={amountChangeHandler}
 					/>
 				</div>
@@ -66,6 +87,7 @@ export const ExpenseForm = () => {
 						type="date"
 						min="2019-01-01"
 						max="2022-12-31"
+						value={enteredDate}
 						onChange={dateChangeHandler}
 					/>
 				</div>
