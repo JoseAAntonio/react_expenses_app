@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import "./ExpenseForm.css";
 
-export const ExpenseForm = () => {
+export const ExpenseForm = (props) => {
 	//NOTE - most common way is using multiple useState instead of a single object as seen below
 	const [enteredTitle, setEnteredTitle] = useState("");
 	const [enteredAmount, setEnteredAmount] = useState("");
@@ -53,6 +53,8 @@ export const ExpenseForm = () => {
 			amount: enteredAmount,
 			date: new Date(enteredDate),
 		};
+		//NOTE -function recieved through props from NewExpense component to add the data input received from the user
+		props.onSaveExpenseData(expenseData);
 		//NOTE - setting the form back to empty string after submition
 		setEnteredTitle("");
 		setEnteredAmount("");
