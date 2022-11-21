@@ -68,7 +68,6 @@ export const ExpenseForm = (props) => {
 					<label>Title</label>
 					<input
 						type="text"
-						//NOTE - 2way binding - listen(onChange) and feed(value) back to the input
 						value={enteredTitle}
 						onChange={titleChangeHandler}
 					/>
@@ -95,7 +94,7 @@ export const ExpenseForm = (props) => {
 				</div>
 			</div>
 			<div className="new-expense__actions">
-				<button type="submit">Add expense</button>
+				<button type="submit">Add Expense</button>
 			</div>
 		</form>
 	);
